@@ -1,4 +1,4 @@
-<%= form_for(@advertising) do |f| %>
+<%= simple_form_for(@advertising) do |f| %>
   <% if @advertising.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@advertising.errors.count, "error") %> prohibited this advertising from being saved:</h2>
@@ -12,22 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.input :title %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.input :description %>
   </div>
   <div class="field">
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
-  </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
+    <%= f.input :status %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button :submit %>
   </div>
 <% end %>

@@ -1,29 +1,12 @@
-<h1>Listing advertisings</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Status</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Anúncios Recentes</h1>
+<% if user_signed_in? %>
+  <%= link_to 'Cadastrar Anúncio', new_advertising_path, class: 'btn btn-primary' %>
+<% end %>
 
 <% @advertisings.each do |advertising| %>
-  <tr>
-    <td><%= advertising.title %></td>
-    <td><%= advertising.description %></td>
-    <td><%= advertising.status %></td>
-    <td><%= advertising.user %></td>
-    <td><%= link_to 'Show', advertising %></td>
-    <td><%= link_to 'Edit', edit_advertising_path(advertising) %></td>
-    <td><%= link_to 'Destroy', advertising, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <blockquote>
+    <p><%= link_to advertising.to_s, advertising_path(advertising) %></p>
+    <small>Autor: <%= advertising.user.email %></small>
+  </blockquote>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Advertising', new_advertising_path %>

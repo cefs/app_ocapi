@@ -1,25 +1,15 @@
-<p id="notice"><%= notice %></p>
+<blockquote>
+  <p><%= @advertising.to_s %></p>
+  <small>Autor: <%= @advertising.user.email %></small>
+</blockquote>
 
-<p>
-  <b>Title:</b>
-  <%= @advertising.title %>
-</p>
+  <div class="well">
+    <%= @advertising.description %>
+  </div>
 
-<p>
-  <b>Description:</b>
-  <%= @advertising.description %>
-</p>
+<% if user_signed_in? %>
+  <%= link_to 'Editar', edit_advertising_path(@advertising), class: 'btn btn-primary' %> 
+  <%= link_to 'Apagar', @advertising, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %> 
+<% end %>
 
-<p>
-  <b>Status:</b>
-  <%= @advertising.status %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @advertising.user %>
-</p>
-
-
-<%= link_to 'Edit', edit_advertising_path(@advertising) %> |
-<%= link_to 'Back', advertisings_path %>
+<%= link_to 'Voltar', advertisings_path, class: 'btn' %>
