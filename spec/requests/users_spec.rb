@@ -25,7 +25,7 @@ feature 'Users' do
     expect(page).to_not have_link 'Cadastre-se'
     expect(page).to_not have_link 'Entrar'
 
-    click_link 'Editar usuário'
+    click_link 'admin@appocapi.com'
 
     expect(page).to have_content 'Editar Usuário'
 
@@ -46,10 +46,10 @@ feature 'Users' do
 
     click_button 'Editar'
 
-    expect(page).to have_content 'Logado como adm@appocapi.com'
+    expect(page).to have_content 'adm@appocapi.com'
     expect(page).to have_content 'Sua conta foi atualizada com sucesso.'
 
-    click_link 'Editar usuário'
+    click_link 'adm@appocapi.com'
 
     expect(page).to have_content 'Editar Usuário'
 

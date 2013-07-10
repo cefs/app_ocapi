@@ -12,6 +12,7 @@ gem 'simple_form'
 gem 'kaminari'
 gem 'inherited_resources'
 gem 'jquery-rails'
+gem 'bootstrap-sass'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

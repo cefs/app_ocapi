@@ -5,20 +5,28 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= yield(:head) %>
 </head>
 <body>
-  <% if user_signed_in? %>
-    Logado como <strong><%= current_user.email %></strong>
-    <%= link_to 'Editar usuário', edit_user_registration_path %> | 
-    <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to 'Cadastre-se', new_user_registration_path %> | 
-    <%= link_to 'Entrar', new_user_session_path %>
-  <% end %>
+  <header class="navbar navbar-fixed-top">
+    <nav class="navbar-inner">
+      <%= render 'shared/navigation' %>
+    </nav>
+  </header>
 
-  <div class="notice"><%= notice %></div>
-  <div class="alert"><%= alert %></div>
-
-  <%= yield %>
+  <div id="main" role="main">
+    <div class="container">
+      <div class="content">
+        <div class="row">
+          <div class="span12">
+            <%= render "shared/messages" %>
+            <%= yield %>
+          </div>
+        </div>
+        <footer>
+        </footer>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
