@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe Advertising do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:user) }
 end
