@@ -8,9 +8,9 @@
   <div class="field">
     <%= f.input :status %>
   </div>
-  <div class="actions">
-    <%= f.button :submit %>
-  </div>
+
+  <%= f.button :submit %>
+  <%= link_to 'Voltar', advertisings_path, class: 'btn' %>
 <% end %>
 
 <script>
