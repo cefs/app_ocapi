@@ -7,6 +7,10 @@ class Advertising < ActiveRecord::Base
 
   validates :description, :status, :title, presence: true
 
+  scope :approved, lambda {
+    where { status.eq Status::APPROVED }
+  }
+
   def to_s
     "#{title} - #{I18n.localize(created_at.to_date)}".to_s
   end

@@ -1,6 +1,11 @@
 # encoding: utf-8
 class AdvertisingsController < InheritedResources::Base
   before_filter :authenticate_user!, except: [:index, :show]
+  respond_to :json, only: :index
+
+  def index
+    @advertisings = Advertising.approved
+  end
 
   def new
     @advertising = build_resource
