@@ -3,8 +3,8 @@ class AdvertisingsController < InheritedResources::Base
   before_filter :authenticate_user!, except: [:index, :show]
 
   def new
-    @advertising = Advertising.new
-    @advertising.status = "Pending"
+    @advertising = build_resource
+    @advertising.status = Status::PENDING
   end
 
   def create
@@ -16,6 +16,8 @@ class AdvertisingsController < InheritedResources::Base
 
   def edit
     @advertising = Advertising.find(params[:id])
+    @advertising.status = Status::PENDING
+
     unless @advertising.user == current_user
       redirect_to root_path, notice: 'Você não tem permissão!'
     end
@@ -29,6 +31,5 @@ class AdvertisingsController < InheritedResources::Base
     else
       destroy!
     end
-
   end
 end

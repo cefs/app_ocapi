@@ -1,6 +1,8 @@
 class Advertising < ActiveRecord::Base
   attr_accessible :description, :status, :title, :user
 
+  has_enumeration_for :status, with: Status, create_helpers: true
+
   belongs_to :user
 
   validates :description, :status, :title, presence: true

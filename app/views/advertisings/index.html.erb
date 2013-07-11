@@ -1,6 +1,8 @@
 <h1>Anúncios Recentes</h1>
 <% if user_signed_in? %>
-  <%= link_to 'Cadastrar Anúncio', new_advertising_path, class: 'btn btn-primary' %>
+  <blockquote>
+    <%= link_to 'Cadastrar Anúncio', new_advertising_path, class: 'btn btn-primary' %>
+  </blockquote>
 <% end %>
 
 <% @advertisings.each do |advertising| %>

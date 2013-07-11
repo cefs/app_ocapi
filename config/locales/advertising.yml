@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      advertising:
+        one: 'Anúncio'
+        other: 'Anúncios'
+    attributes:
+      advertising:
+        title: 'Título'
+        description: 'Descrição'
+        status: 'Status'
+        user: 'Autor'
