@@ -37,4 +37,22 @@ class AdvertisingsController < InheritedResources::Base
       destroy!
     end
   end
+
+  protected
+
+  def create_resource(object)
+    object.transaction do
+      object.status = Status::PENDING
+
+      super
+    end
+  end
+
+  def update_resource(object, attributes)
+    object.transaction do
+      object.status = Status::PENDING
+
+      super
+    end
+  end
 end
