@@ -5,6 +5,8 @@ class Advertising < ActiveRecord::Base
 
   belongs_to :user
 
+  delegate :email, to: :user, allow_nil: true, prefix: true
+
   validates :description, :status, :title, presence: true
 
   scope :approved, lambda {
