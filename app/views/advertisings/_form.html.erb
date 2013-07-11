@@ -1,16 +1,4 @@
 <%= simple_form_for(@advertising) do |f| %>
-  <% if @advertising.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@advertising.errors.count, "error") %> prohibited this advertising from being saved:</h2>
-
-      <ul>
-      <% @advertising.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="field">
     <%= f.input :title %>
   </div>
