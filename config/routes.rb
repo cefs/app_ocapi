@@ -1,5 +1,9 @@
 AppOcapi::Application.routes.draw do
-  resources :advertisings
+  resources :advertisings do
+    member do
+      put "approved" => "advertisings#approved"
+    end
+  end
 
   devise_for :users
 

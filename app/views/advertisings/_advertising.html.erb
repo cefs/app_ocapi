@@ -1,4 +1,8 @@
 <blockquote>
   <p><%= link_to advertising.to_s, advertising_path(advertising) %></p>
   <small>Autor: <%= advertising.user_email %></small>
+
+  <% unless advertising.approved? %>
+    <%= link_to 'aprovar', approved_advertising_path(advertising), method: :put %>
+  <% end %>
 </blockquote>

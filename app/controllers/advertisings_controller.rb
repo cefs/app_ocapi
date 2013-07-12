@@ -4,7 +4,11 @@ class AdvertisingsController < InheritedResources::Base
   respond_to :json, only: :index
 
   def index
-    @advertisings = Advertising.approved
+    if user_signed_in? && current_user.role == 'admin'
+      @advertisings = Advertising.all
+    else
+      @advertisings = Advertising.approved
+    end
   end
 
   def new
@@ -36,6 +40,17 @@ class AdvertisingsController < InheritedResources::Base
     else
       destroy!
     end
+  end
+
+  def approved
+    advertising = Advertising.find(params[:id])
+    authorize! :approved, advertising
+
+    if advertising.update_attribute :status, Status::APPROVED
+      flash[:notice] = 'O anúncio foi aprovado.'
+    end
+
+    redirect_to root_path
   end
 
   protected
