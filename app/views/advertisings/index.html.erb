@@ -1,10 +1,11 @@
 <h1>Anúncios Recentes</h1>
 
-<% if user_signed_in? %>
+<% if can? :new, Advertising %>
   <blockquote>
     <%= link_to 'Cadastrar Anúncio', new_advertising_path, class: 'btn btn-primary' %>
   </blockquote>
 <% end %>
+
 
 <%= render @advertisings %>
 <%= paginate @advertisings %>
