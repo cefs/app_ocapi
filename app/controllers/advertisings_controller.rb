@@ -6,9 +6,9 @@ class AdvertisingsController < InheritedResources::Base
 
   def index
     if user_signed_in? && current_user.role == 'admin'
-      @advertisings = Advertising.order { created_at.desc }
+      @advertisings = Advertising.order { created_at.desc }.page(params[:page]).per(5)
     else
-      @advertisings = Advertising.approved
+      @advertisings = Advertising.approved.page(params[:page]).per(5)
     end
   end
 
