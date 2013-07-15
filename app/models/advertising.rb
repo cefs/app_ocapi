@@ -10,7 +10,9 @@ class Advertising < ActiveRecord::Base
   validates :description, :status, :title, presence: true
 
   scope :approved, lambda {
-    where { status.eq Status::APPROVED }
+    where { status.eq Status::APPROVED }.order{
+      created_at.desc
+    }
   }
 
   def to_s
