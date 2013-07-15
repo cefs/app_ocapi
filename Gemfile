@@ -30,6 +30,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'machinist', '2.0'
   gem 'shoulda-matchers', '2.2.0'
   gem 'selenium-webdriver', '~> 2.33.0'
   gem 'database_cleaner'
