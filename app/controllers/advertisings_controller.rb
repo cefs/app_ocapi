@@ -5,7 +5,7 @@ class AdvertisingsController < InheritedResources::Base
   respond_to :json, only: :index
 
   def index
-    if user_signed_in? && current_user.role == 'admin'
+    if user_signed_in? && current_user.role == Role::ADMIN
       @advertisings = Advertising.order { created_at.desc }.page(params[:page]).per(5)
     else
       @advertisings = Advertising.approved.page(params[:page]).per(5)
@@ -36,7 +36,7 @@ class AdvertisingsController < InheritedResources::Base
   def destroy
     @advertising = Advertising.find(params[:id])
 
-    if current_user.role == 'admin' || @advertising.user == current_user
+    if current_user.role == Role::ADMIN || @advertising.user == current_user
       destroy! do |success, failure|
         success.html { redirect_to root_path, notice: 'Apagado com sucesso!' }
       end

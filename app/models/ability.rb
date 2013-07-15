@@ -4,11 +4,11 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    if user.role == "admin"
+    if user.role == Role::ADMIN
       can [:read, :update, :create, :destroy, :approved], :all
     end
 
-    if user.persisted? && user.role == "visitor"
+    if user.persisted? && user.role == Role::VISITOR
       can [:read, :update, :create, :destroy], :all
     else
       can [:read], :all
