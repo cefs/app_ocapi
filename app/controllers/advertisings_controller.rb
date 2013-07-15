@@ -1,11 +1,12 @@
 # encoding: utf-8
 class AdvertisingsController < InheritedResources::Base
   before_filter :authenticate_user!, except: [:index, :show]
+  load_and_authorize_resource
   respond_to :json, only: :index
 
   def index
     if user_signed_in? && current_user.role == 'admin'
-      @advertisings = Advertising.all
+      @advertisings = Advertising.order { created_at.desc }
     else
       @advertisings = Advertising.approved
     end
@@ -28,23 +29,24 @@ class AdvertisingsController < InheritedResources::Base
     @advertising.status = Status::PENDING
 
     unless @advertising.user == current_user
-      redirect_to root_path, notice: 'Você não tem permissão!'
+      redirect_to root_path, notice: 'você não tem permissão!'
     end
   end
 
   def destroy
     @advertising = Advertising.find(params[:id])
 
-    unless @advertising.user == current_user
-      redirect_to root_path, notice: 'Você não tem permissão!'
+    if current_user.role == 'admin' || @advertising.user == current_user
+      destroy! do |success, failure|
+        success.html { redirect_to root_path, notice: 'Apagado com sucesso!' }
+      end
     else
-      destroy!
+      redirect_to root_path, notice: 'Você não tem permissão!'
     end
   end
 
   def approved
     advertising = Advertising.find(params[:id])
-    authorize! :approved, advertising
 
     if advertising.update_attribute :status, Status::APPROVED
       flash[:notice] = 'O anúncio foi aprovado.'
