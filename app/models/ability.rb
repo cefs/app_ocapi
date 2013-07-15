@@ -8,9 +8,11 @@ class Ability
       can [:read, :update, :create, :destroy, :approved], :all
     end
 
-    if user.persisted? && user.role == Role::VISITOR
+    if user.role == Role::VISITOR && user.persisted?
       can [:read, :update, :create, :destroy], :all
-    else
+    end
+
+    if user.role == Role::VISITOR && !user.persisted?
       can [:read], :all
     end
   end
