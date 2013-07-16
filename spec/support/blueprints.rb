@@ -20,3 +20,9 @@ Advertising.blueprint(:anuncio_carro_aprovado) do
   description { 'Descrição do anúncio' }
   status { Status::APPROVED }
 end
+
+Advertising.blueprint(:anuncio_bicicleta_pendente) do
+  title { 'Titulo do anúncio bicicleta' }
+  description { 'Descrição do anúncio bicicleta' }
+  status { Status::PENDING }
+end
