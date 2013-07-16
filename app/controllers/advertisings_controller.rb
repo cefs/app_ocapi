@@ -21,7 +21,9 @@ class AdvertisingsController < InheritedResources::Base
     @advertising = Advertising.new(params[:advertising])
     @advertising.user_id = current_user.id
 
-    create!
+    create! do |success, failure|
+      success.html { redirect_to edit_advertising_path(@advertising), notice: 'Criado com sucesso!' }
+    end
   end
 
   def edit
@@ -29,7 +31,7 @@ class AdvertisingsController < InheritedResources::Base
     @advertising.status = Status::PENDING
 
     unless @advertising.user == current_user
-      redirect_to root_path, notice: 'você não tem permissão!'
+      redirect_to root_path, alert: 'Você não tem permissão!'
     end
   end
 
@@ -41,7 +43,7 @@ class AdvertisingsController < InheritedResources::Base
         success.html { redirect_to root_path, notice: 'Apagado com sucesso!' }
       end
     else
-      redirect_to root_path, notice: 'Você não tem permissão!'
+      redirect_to root_path, alert: 'Você não tem permissão!'
     end
   end
 
